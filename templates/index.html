@@ -1,0 +1,36 @@
+{% extends 'principal.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+
+
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Cursos!</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/registro">Registro</a></li> <!--no poner .html-->
+            <li><a href="/login">Entrar</a></li>
+        </ul>
+    </div>
+
+
+    
+    {% for cur in cursos %}  <!-- Esto esta en views.py def : {"cursos":Curso.objects.all()}-->
+        <h2>{{ cur.curso_titulo }}</h2>
+        <p>{{ cur.curso_contenido }}</p>
+        <small>{{ cur.curso_publicado }}</small>
+    {% endfor %}
+
+    {% endblock %}
+
+</body>
+</html>
