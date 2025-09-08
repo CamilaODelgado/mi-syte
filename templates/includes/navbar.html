@@ -1,0 +1,20 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Cursos!</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/">Inicio</a></li>
+
+            {% if user.is_authenticated %}  <!-- si el usuario esta autenticado-->
+                <li><a href="/user">{{ user.username }}</a></li>  <!-- muestra el nombre del usuario autenticado-->
+                <li><a href="/logout">Salir</a></li>
+                
+            {% else %}
+
+
+            <li><a href="/registro">Registro</a></li> <!--no poner .html-->
+            <li><a href="/login">Entrar</a></li>
+
+            {% endif %}
+        </ul>
+    </div>
+</nav>

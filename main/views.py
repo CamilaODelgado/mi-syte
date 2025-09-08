@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect #aqui agregamos el redirect que es para redirreccionar
 
 
-from django.http import HttpResponse
+
 # Create your views here.
 
 from .models import Curso
 
 #from del registro
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm , AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 
 ##para poner mensajes
@@ -37,3 +37,15 @@ def register(request):
     #
     form = UserCreationForm()
     return render(request, 'registro.html', {"form":form}) #recomendable aca utilizar el mismo nombre en la variable
+
+
+##para cerrar sesion
+def logout_request(request):
+    logout(request)
+    messages.info(request, "Has cerrado sesion exitosamente")
+    return redirect('main:homepage')
+
+##para iniciar sesion
+def login_request(request):
+    form = AuthenticationForm() #esto es para que aparezca el formulario vacio
+    render(request, 'login.html', {"form":form})
