@@ -47,5 +47,23 @@ def logout_request(request):
 
 ##para iniciar sesion
 def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            nombre_usuario = form.cleaned_data.get('username')
+            contrasena = form.cleaned_data.get('password')
+            usuario = authenticate(username=nombre_usuario, password=contrasena)
+            
+            
+            if usuario is not None:
+                login(request, usuario)
+                messages.success(request, f'Bienvenido {nombre_usuario}')
+                return redirect('main:homepage')
+            else:
+                messages.error(request, 'Usuario o contrasena incorrecta')
+        else:
+            messages.error(request, 'Usuario o contrasena incorrecta')
+    
+    
     form = AuthenticationForm() #esto es para que aparezca el formulario vacio
-    render(request, 'login.html', {"form":form})
+    return render(request, 'login.html', {"form":form})
